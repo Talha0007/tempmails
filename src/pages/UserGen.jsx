@@ -38,7 +38,7 @@ const UserGen = () => {
         specialCharacterProbability < 0.2 ? randomSpecialCharacter() : "";
 
       // Combine the entered name with the special character, username, and random digits
-      const username = `${specialCharacter}${inputName}${specialCharacter}${randomNumber}`;
+      const username = `${inputName}${specialCharacter}${randomNumber}`;
 
       setGeneratedUsername(username);
     }
