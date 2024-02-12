@@ -49,7 +49,7 @@ const NameGen = () => {
             specialCharacterProbability < 0.2 ? randomSpecialCharacter() : "";
 
           const fullName = (first + last).toLowerCase();
-          const username = `${specialCharacter}${fullName}${specialCharacter}${randomNumber}`;
+          const username = `${fullName}${specialCharacter}${randomNumber}`;
           setGeneratedUsername(username);
         }
       };
