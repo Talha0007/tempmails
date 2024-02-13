@@ -171,7 +171,10 @@ function DrawerAppBar(props) {
             <MenuIcon />
           </IconButton>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}>
+          <Box
+            onClick={() => navigate("/")}
+            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+          >
             <img src={Logo} style={{ width: "150px", margin: "-0.5rem 0" }} />
           </Box>
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 // import AppBar from "./components/AppBar";
 
@@ -14,16 +14,16 @@ import ContactUs from "./pages/ContactUs";
 const App = () => {
   return (
     <div>
-      <Routes basename="/">
-        <Switch>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/emailgen" element={<EmailGen />} />
-          <Route path="/usernamegen" element={<UserGen />} />
-          <Route path="/namegen" element={<NameGen />} />
-          <Route path="/aboutus" element={<AboutUs />} />
-          <Route path="/contactus" element={<ContactUs />} />
-        </Switch>
+      {/* <Switch> */}
+      <Routes>
+        <Route exact path="/" element={<LandingPage />} />
+        <Route path="/emailgen" element={<EmailGen />} />
+        <Route path="/usernamegen" element={<UserGen />} />
+        <Route path="/namegen" element={<NameGen />} />
+        <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/contactus" element={<ContactUs />} />
       </Routes>
+      {/* </Switch> */}
     </div>
   );
 };
