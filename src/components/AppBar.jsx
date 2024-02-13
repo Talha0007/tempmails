@@ -97,11 +97,9 @@ function DrawerAppBar(props) {
   const drawer = (
     <>
       <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-        <Typography variant="h6" sx={{ my: 2 }}>
-          <span onClick={() => navigate("/")}>
-            <img src={LogoDrawer} style={{ width: "200px" }} />
-          </span>
-        </Typography>
+        <span onClick={() => navigate("/")}>
+          <img src={LogoDrawer} style={{ width: "200px" }} />
+        </span>
 
         <Divider />
         <List>
@@ -162,7 +160,7 @@ function DrawerAppBar(props) {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar component="nav">
-        <Toolbar>
+        <Toolbar sx={{ backgroundColor: "#7FFFD4" }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -174,7 +172,7 @@ function DrawerAppBar(props) {
           </IconButton>
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}>
-            <img src={Logo} style={{ width: "150px" }} />
+            <img src={Logo} style={{ width: "150px", margin: "-0.5rem 0" }} />
           </Box>
 
           <Box
@@ -193,6 +191,9 @@ function DrawerAppBar(props) {
                   fontWeight: "bold",
                   fontSize: "20px",
                   marginRight: "50px",
+                  border: "1px solid white",
+                  borderRadius: "8px",
+                  padding: "5px 8px",
                 }}
               >
                 {item.tool}
