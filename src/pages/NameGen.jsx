@@ -3,6 +3,8 @@ import axios from "axios";
 
 import { Helmet } from "react-helmet";
 
+import randomNames from "../utils";
+
 // import mui
 import {
   Grid,
@@ -22,45 +24,66 @@ const NameGen = () => {
   const [generatedUsername, setGeneratedUsername] = useState("");
   const apiKey = "MT3H-KYRO-42F8-JW7N";
 
-  const fetchRandomName = async () => {
-    try {
-      const response = await axios.get("https://randomuser.me/api/", {
-        headers: {
-          "X-Api-Key": apiKey,
-        },
-      });
-      const { first, last } = response.data.results[0].name;
-      const generatedName = `${first} ${last}`;
+  const handleNames = () => {
+    const randomName = randomNames[Math.floor(Math.random() * randomNames.length)];
 
-      const randomName = () => {
-        if (generatedName.trim() !== "") {
-          const randomDigit = () => Math.floor(Math.random() * 10);
-          const randomSpecialCharacter = () =>
-            Math.random() < 0.5 ? "." : "_";
+    const processedName = randomName.replace(/\s/g, '').toLowerCase();
+    const numberOfDigits = Math.floor(Math.random() * 4) + 1;
+    const randomDigit = () => Math.floor(Math.random() * 10);
+    let randomNumber = "";
+            for (let i = 0; i < numberOfDigits; i++) {
+              randomNumber += randomDigit();
+            }
 
-          // Generate a random number of digits (1 to 4)
-          const numberOfDigits = Math.floor(Math.random() * 4) + 1;
+            const randomUsername = `${processedName}${randomNumber}`;
 
-          let randomNumber = "";
-          for (let i = 0; i < numberOfDigits; i++) {
-            randomNumber += randomDigit();
-          }
-          // Occasionally include a dot or underscore
-          const specialCharacterProbability = Math.random();
-          const specialCharacter =
-            specialCharacterProbability < 0.2 ? randomSpecialCharacter() : "";
+   
 
-          const fullName = (first + last).toLowerCase();
-          const username = `${fullName}${specialCharacter}${randomNumber}`;
-          setGeneratedUsername(username);
-        }
-      };
-      setRandomName(generatedName);
-      randomName();
-    } catch (error) {
-      console.error("Error fetching random name:", error);
-    }
-  };
+    // console.log(finalName);
+
+    setRandomName(randomName);
+    setGeneratedUsername(randomUsername)
+  }
+
+  // const fetchRandomName = async () => {
+  //   try {
+  //     const response = await axios.get("https://randomuser.me/api/", {
+  //       headers: {
+  //         "X-Api-Key": apiKey,
+  //       },
+  //     });
+  //     const { first, last } = response.data.results[0].name;
+  //     const generatedName = `${first} ${last}`;
+
+  //     const randomName = () => {
+  //       if (generatedName.trim() !== "") {
+  //         const randomDigit = () => Math.floor(Math.random() * 10);
+  //         const randomSpecialCharacter = () =>
+  //           Math.random() < 0.5 ? "." : "_";
+
+  //         // Generate a random number of digits (1 to 4)
+  //         const numberOfDigits = Math.floor(Math.random() * 4) + 1;
+
+  //         let randomNumber = "";
+  //         for (let i = 0; i < numberOfDigits; i++) {
+  //           randomNumber += randomDigit();
+  //         }
+  //         // Occasionally include a dot or underscore
+  //         const specialCharacterProbability = Math.random();
+  //         const specialCharacter =
+  //           specialCharacterProbability < 0.2 ? randomSpecialCharacter() : "";
+
+  //         const fullName = (first + last).toLowerCase();
+  //         const username = `${fullName}${specialCharacter}${randomNumber}`;
+  //         setGeneratedUsername(username);
+  //       }
+  //     };
+  //     setRandomName(generatedName);
+  //     randomName();
+  //   } catch (error) {
+  //     console.error("Error fetching random name:", error);
+  //   }
+  // };
 
   const handleCopyName = () => {
     navigator.clipboard.writeText(randomName);
@@ -68,6 +91,8 @@ const NameGen = () => {
   const handleCopyUsername = () => {
     navigator.clipboard.writeText(generatedUsername);
   };
+
+
   return (
     <>
       <Helmet>
@@ -112,7 +137,7 @@ const NameGen = () => {
                 placeholder="Press button to generate..."
                 value={randomName}
               />
-              <Button onClick={fetchRandomName}>Generate</Button>
+              <Button onClick={handleNames}>Generate</Button>
             </ButtonGroup>
             {randomName && (
               <>
